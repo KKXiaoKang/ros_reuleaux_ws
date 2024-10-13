@@ -27,7 +27,7 @@ openrave-robot.py biped_s4_left_arm.dae --info joints
 ### 1 9 6 测试中 | 成功有效果
 python `openrave-config --python-dir`/openravepy/_openravepy_/ikfast.py --robot=biped_s4_left_arm.dae --iktype=transform6d --baselink=1 --eelink=9 --freeindex=6 --savefile=$(pwd)/ikfastBiped.cpp
 
-### 1 8 6 测试中
+### 1 8 6 测试中 | 感觉末端ik的结果不是很对
 python `openrave-config --python-dir`/openravepy/_openravepy_/ikfast.py --robot=biped_s4_left_arm.dae --iktype=transform6d --baselink=1 --eelink=8 --freeindex=6 --savefile=$(pwd)/ikfastBiped3.cpp
 
 # 有了ikfast，开始生成可达图
@@ -38,15 +38,15 @@ rosrun map_creator create_reachability_map 0.05 biped_s4_186_0.05.h5 # 给一个
 rosrun map_creator create_reachability_map 0.08 biped_s4_186_0.08.h5 # 给一个特殊名称
 
 # 查看可达图
-h5dump /home/lab/ros_reuleaux_ws/src/reuleaux/map_creator/maps/biped_s4_r0.08_reachability.h5
+h5dump /home/lab/ros_reuleaux_ws/src/map_creator/maps/biped_s4_186_0.08_2.h5
 
 # 加载/发布 可达图
-rosrun map_creator load_reachability_map /home/lab/ros_reuleaux_ws/src/reuleaux/map_creator/maps/biped_s4_r0.05_reachability.h5
-rosrun map_creator load_reachability_map /home/lab/ros_reuleaux_ws/src/reuleaux/map_creator/maps/biped_s4_r0.08_reachability.h5
+rosrun map_creator load_reachability_map /home/lab/ros_reuleaux_ws/src/map_creator/maps/biped_s4_r0.05_reachability.h5
+rosrun map_creator load_reachability_map /home/lab/ros_reuleaux_ws/src/map_creator/maps/biped_s4_r0.08_reachability.h5
 
-rosrun map_creator load_reachability_map /home/lab/ros_reuleaux_ws/src/reuleaux/map_creator/maps/biped_s4_186_0.05.h5
-rosrun map_creator load_reachability_map /home/lab/ros_reuleaux_ws/src/reuleaux/map_creator/maps/biped_s4_186_0.08.h5
-
+rosrun map_creator load_reachability_map /home/lab/ros_reuleaux_ws/src/map_creator/maps/biped_s4_186_0.05.h5
+rosrun map_creator load_reachability_map /home/lab/ros_reuleaux_ws/src/map_creator/maps/biped_s4_186_0.08.h5
+rosrun map_creator load_reachability_map /home/lab/ros_reuleaux_ws/src/map_creator/maps/biped_s4_186_0.08_2.h5
 ```
 ```bash
 root@9c2c477c1ff8:/home/lab/ros_reuleaux_ws/src/biped_s4/urdf# openrave-robot.py biped_s4_left_arm.dae --info links
