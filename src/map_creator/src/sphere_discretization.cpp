@@ -94,6 +94,54 @@ octomap::Pointcloud SphereDiscretization::make_sphere_points(const octomap::poin
   return spherePoints;
 }
 
+void SphereDiscretization::make_sphere_specific_poses(
+    const octomap::point3d& origin,
+    double r,
+    const std::vector<tf2::Quaternion>& specific_orientations,
+    std::vector<geometry_msgs::Pose>& pose_Col)
+{
+    // 清空姿态集合向量
+    pose_Col.clear();
+
+    // 预留内存以优化性能
+    const unsigned MAX_INDEX = (2 * 5 * 5);
+    pose_Col.reserve(specific_orientations.size() * MAX_INDEX); // 100是一个估算值，可以根据需要调整
+
+    const double DELTA = M_PI / 5.; // 分辨率设置
+    unsigned index = 0;
+    // 生成球面上的位置
+    std::vector<geometry_msgs::Vector3> position_vector;
+    for (double phi = 0; phi < 2 * M_PI; phi += DELTA) {  // Azimuth [0, 2PI]
+        for (double theta = 0; theta < M_PI; theta += DELTA) {  // Elevation [0, PI]
+            geometry_msgs::Vector3 position;
+            position.x = r * cos(phi) * sin(theta) + origin.x();
+            position.y = r * sin(phi) * sin(theta) + origin.y();
+            position.z = r * cos(theta) + origin.z();
+            position_vector.push_back(position);
+        }
+    }
+
+    // 为每个球的位置应用所有特定姿态
+    for (const auto& specific_orientation : specific_orientations) {
+        for (const auto& position : position_vector) {
+            geometry_msgs::Pose pose;
+
+            // 设置球的中心位置
+            pose.position.x = position.x;
+            pose.position.y = position.y;
+            pose.position.z = position.z;
+
+            // 使用提供的特定姿态（四元数）
+            pose.orientation.x = specific_orientation.x();
+            pose.orientation.y = specific_orientation.y();
+            pose.orientation.z = specific_orientation.z();
+            pose.orientation.w = specific_orientation.w();
+
+            // 将姿态添加到集合
+            pose_Col.push_back(pose);
+        }
+    }
+}
 
 void SphereDiscretization::make_sphere_poses(const octomap::point3d& origin, double r, std::vector< geometry_msgs::Pose >& pose_Col)
 {

@@ -21,6 +21,9 @@
 typedef std::vector<std::pair< std::vector< double >, const std::vector< double >* > > MultiVector;
 //typedef std::multimap< const std::vector< double >*, const std::vector< double >* > MultiMap;
 
+//static const std::string service_setting = "ALL"; // 定义要生成工作空间的类型
+static const std::string service_setting = "SPECIFIED"; 
+
 /**
  * @brief isFloat 函数用于判断一个字符串是否能转换为浮点数
  * @param s 字符串
@@ -145,8 +148,32 @@ int main(int argc, char **argv)
       static std::vector< geometry_msgs::Pose > pose;        // 创建一个ros通用的geometry_msgs的Pose向量
       sd.convertPointToVector(new_data[i], sphere_coord[i]); // 通过 convertPointToVector 方法，将球的中心转换成坐标存储在 sphere_coord
 
-      // TODO 针对所有可能的姿态（修改为根据服务设置为ALL | Specified）
-      sd.make_sphere_poses(new_data[i], radius, pose); // 针对该i个球，生成所有可能的姿态，并将其存储在 pose 向量中
+      // 检查服务设置
+      if (service_setting == "ALL") {
+          // 生成所有可能的姿态
+          sd.make_sphere_poses(new_data[i], radius, pose);
+          // 产生全部姿态
+          ROS_INFO("Generating all possible poses for sphere %d", i);
+      }else if (service_setting == "SPECIFIED") {
+          // 生成特定姿态（这里需要定义一个特定的姿态向量或四元数）
+          std::vector<tf2::Quaternion> specific_orientations;  // 存储所有特定姿态的四元数
+          
+          // 从提供的数据中创建四元数
+          tf2::Quaternion specific_orientation;
+          specific_orientation.setX(0.7201371761882054);
+          specific_orientation.setY(0.19436134185739312);
+          specific_orientation.setZ(0.6442554546357139);
+          specific_orientation.setW(-0.13388952575544086);     
+
+          // 将特定的姿态添加到向量中
+          specific_orientations.push_back(specific_orientation);
+
+          // 调用函数生成特定姿态的集合     
+          sd.make_sphere_specific_poses(new_data[i], radius, specific_orientations, pose);
+          
+          // 产生全部姿态
+          ROS_INFO("Generating SPECIFIED possible poses for sphere %d", i);
+      }
 
       for (int j = 0; j < pose.size(); j++)
       {

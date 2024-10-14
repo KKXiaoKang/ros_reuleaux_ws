@@ -40,6 +40,9 @@ public:
   //! Creating a sphere with points and return poincloud
   octomap::Pointcloud make_sphere_points(const octomap::point3d& origin, double r);
 
+  //! Creating a sphere and create poses on the specific orientations and return vector of poses
+  void make_sphere_specific_poses(const octomap::point3d& origin, double r, const std::vector<tf2::Quaternion>& specific_orientations, std::vector<geometry_msgs::Pose>& pose_Col);
+  
   //! Creating a sphere and and create poses on the outer sphere and return vector of poses
   void make_sphere_poses(const octomap::point3d &origin, double r, std::vector< geometry_msgs::Pose >& pose_Col);
 
