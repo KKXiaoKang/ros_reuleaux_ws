@@ -6,8 +6,8 @@
 //#include "mh5_ikfast.cpp"
 //#include "abb_irb2400_manipulator_ikfast_solver.cpp"
 //#include "ur5_ikfast.cpp"
-//#include "ikfastBiped.cpp"
-#include "ikfastBiped3.cpp"
+#include "ikfastBiped.cpp"
+//#include "ikfastBiped3.cpp"
 
 #include <stdio.h>
 #include <stdlib.h>
