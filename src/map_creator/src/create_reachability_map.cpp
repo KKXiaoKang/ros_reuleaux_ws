@@ -159,11 +159,20 @@ int main(int argc, char **argv)
           std::vector<tf2::Quaternion> specific_orientations;  // 存储所有特定姿态的四元数
           
           // 从提供的数据中创建四元数
+          // contactdb+water_bottle_170_best_q [ 0.63951406 -0.32413632  0.60869027  0.33978459]
+          // contactdb+water_bottle_126_best_q [ 0.72399718  0.19540314  0.64770873 -0.13460719]
           tf2::Quaternion specific_orientation;
+          // water_bottle_126_best_q
           specific_orientation.setX(0.7201371761882054);
           specific_orientation.setY(0.19436134185739312);
           specific_orientation.setZ(0.6442554546357139);
           specific_orientation.setW(-0.13388952575544086);     
+
+          // // // water_bottle_170_best_q
+          // specific_orientation.setX(0.63951406);
+          // specific_orientation.setY(-0.32413632);
+          // specific_orientation.setZ(0.60869027);
+          // specific_orientation.setW(0.33978459); 
 
           // 将特定的姿态添加到向量中
           specific_orientations.push_back(specific_orientation);
