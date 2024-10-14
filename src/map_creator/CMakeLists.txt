@@ -66,6 +66,11 @@ add_executable(create_reachability_map src/create_reachability_map.cpp)
 add_dependencies(create_reachability_map ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(create_reachability_map sphere_discretization kinematics hdf5_dataset ${catkin_LIBRARIES})
 
+# Executable for reachability map service
+add_executable(create_reachability_map_service src/create_reachability_map_service.cpp)
+add_dependencies(create_reachability_map_service ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(create_reachability_map_service sphere_discretization kinematics hdf5_dataset ${catkin_LIBRARIES})
+
 # Executable for inverse reachability map
 add_executable(create_inverse_reachability_map src/create_inverse_reachability_map.cpp)
 add_dependencies(create_inverse_reachability_map ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})

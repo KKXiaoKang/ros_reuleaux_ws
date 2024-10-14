@@ -52,8 +52,10 @@ octomap::OcTree* SphereDiscretization::generateSphereTree2(const octomap::point3
 
 octomap::OcTree* SphereDiscretization::generateBoxTree(const octomap::point3d& origin, float diameter, float resolution)
 {
+  // 建了一个分辨率为 resolution / 2 的空八叉树（OcTree）
   octomap::OcTree* tree = new octomap::OcTree(resolution / 2);
   octomap::Pointcloud p;
+  // 三层嵌套的 for 循环，遍历了以 origin 为中心、半径为 1.5 * diameter 的三维空间中的所有点。步进值为 resolution，这意味着体素的大小由分辨率控制
   for (float x = origin.x() - diameter * 1.5; x <= origin.x() + diameter * 1.5; x += resolution)
   {
     for (float y = origin.y() - diameter * 1.5; y <= origin.y() + diameter * 1.5; y += resolution)
@@ -66,6 +68,7 @@ octomap::OcTree* SphereDiscretization::generateBoxTree(const octomap::point3d& o
         point.y() = y;
         point.z() = z;
         tree->updateNode(point, true);
+        // 为每个点创建体素并更新八叉树
       }
     }
   }
