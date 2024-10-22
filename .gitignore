@@ -167,3 +167,7 @@ devel/
 logs/
 .catkin_tools/
 .vscode/
+
+src/biped_s4/urdf/biped_s4_left_arm.dae
+src/biped_s42/urdf/biped_s42_pro_left.dae
+base_placement_plugin/

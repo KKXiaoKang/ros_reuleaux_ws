@@ -31,7 +31,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://biped_s42/meshes/torso.STL" />
+          filename="package://biped_s42/meshes/HEAD_URDF.STL" />
       </geometry>
       <material
         name="">
@@ -45,7 +45,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://biped_s42/meshes/torso.STL" />
+          filename="package://biped_s42/meshes/HEAD_URDF.STL" />
       </geometry>
     </collision>
   </link>
