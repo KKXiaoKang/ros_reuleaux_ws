@@ -21,8 +21,8 @@
 typedef std::vector<std::pair< std::vector< double >, const std::vector< double >* > > MultiVector;
 //typedef std::multimap< const std::vector< double >*, const std::vector< double >* > MultiMap;
 
-//static const std::string service_setting = "ALL"; // 定义要生成工作空间的类型
-static const std::string service_setting = "SPECIFIED"; 
+static const std::string service_setting = "ALL"; // 定义要生成工作空间的类型
+// static const std::string service_setting = "SPECIFIED"; 
 
 /**
  * @brief isFloat 函数用于判断一个字符串是否能转换为浮点数
